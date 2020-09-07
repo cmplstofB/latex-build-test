@@ -1,6 +1,6 @@
 $latex = 'uplatex-dev %O %S';
 $biber = 'biber --bblencoding=utf8 -u -U --output_safechars';
-$dvipdf = 'dvipdfmx %O -o %D %S';
+$dvipdf = 'dvipdfmx %O -f uptex-haranoaji-04.map -o %D %S';
 $makeindex = 'upmendex %O -g -o %D %S';
 $pdf_mode = 3;
 
