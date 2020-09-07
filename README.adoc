@@ -1,0 +1,46 @@
+= 自動LaTeX組版
+B̅ (cmplstofB) <20594300+cmplstofB@users.noreply.github.com>
+v0.1.0, 2020-07-30
+
+== しくみ
+
+* 手許でLaTeX原稿を編集する
+例えば，
+[source,console]
+----
+$ editor main.tex
+----
+
+* git標識を賦与する。
+例えば，
+[source,console]
+----
+$ git tag v42.0.1
+----
+
+* GitHubに押し込む。
+例えば，
+[source,console]
+----
+$ git push origin v42.0.1
+----
+
+ここでGitHub Actionsが作動。
+「pushかつ “v” から始まるtagが賦与されていれば
+指定した一連の動作（具体的にはLaTeX組版と
+Releaseへの上げ込み）を行う」
+という設定にしているので，
+如述の操作に感応する。
+
+Dockerが構築されて原稿が処理され，
+しばらく待つと
+Releaseが一つ増えてそこに
+組版結果のPDF文書が上がる。
+
+
+== やりたいこと
+
+標識を自動で増分したい::
+これは多分そう難しくないけど，
+できればgitやGitHubの機能を用いて
+効率的・最小限の追加で達成したい。
