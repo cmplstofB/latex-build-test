@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: LaTeX build workflow
+name: 自動LaTeX組版
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -13,19 +13,19 @@ on:
 jobs:
   # This workflow contains a single job called "greet"
   build:
-    name: LaTeX build
+    name: LaTeX組版
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     container: dockershelf/latex:full
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Checkout code
+    - name: 原稿を勘定
       uses: actions/checkout@v2
-    - name: Build by LaTeX
+    - name: latexmkによる備立
       run: |
-        pdflatex main.tex
-    - name: Create release
+        latexmk main.tex
+    - name: 公開版を生成
       id: create-release
       uses: actions/create-release@v1
       env:
@@ -35,7 +35,7 @@ jobs:
         release_name: Release ${{ github.ref }}
         draft: false
         prerelease: false
-    - name: Upload Release Asset
+    - name: 公開版を上げ込み
       id: upload-release-asset
       uses: actions/upload-release-asset@v1
       env:
