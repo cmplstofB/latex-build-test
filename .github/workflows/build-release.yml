@@ -25,8 +25,8 @@ jobs:
     - name: latexmkによる備立
       run: |
         latexmk main.tex
-  message:
-    name: 遂行説辞を取得
+  changelog:
+    name: 変更履歴関連
     needs: build
     outputs:
       commit_message:
@@ -35,7 +35,8 @@ jobs:
         run: echo "::set-output nmae=commit_message::$(git log --format=%B -n 1 ${{ github.event.after }})"
   release:
     name: 組版結果を離立
-    needs: message
+    needs: changelog
+    steps:
     - name: 公開版を生成
       id: create-release
       uses: actions/create-release@v1
@@ -44,7 +45,7 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: 公開版 (${{ github.ref }})
-        body: ${{ needs.message.outputs.commit_message }}
+        body: ${{ needs.changelog.outputs.commit_message }}
         draft: false
         prerelease: false
     - name: 公開版を上げ込み
