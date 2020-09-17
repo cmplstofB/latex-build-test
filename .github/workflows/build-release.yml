@@ -25,6 +25,11 @@ jobs:
     - name: latexmkによる備立
       run: |
         latexmk main.tex
+    - name: 成果物として上げ込み
+      uses: actions/upload-artifact@v2
+      with:
+        name: main.pdf
+        path: ./main.pdf
   changelog:
     name: 変更履歴関連
     runs-on: ubuntu-latest
@@ -52,6 +57,10 @@ jobs:
         body: ${{ needs.changelog.outputs.commit_message }}
         draft: false
         prerelease: false
+    - name: 公開版用の成果物を下し込み
+      uses: actions/download-artifact@v2
+      with:
+        name: main.pdf
     - name: 公開版を上げ込み
       id: upload-release-asset
       uses: actions/upload-release-asset@v1
