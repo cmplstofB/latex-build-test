@@ -25,6 +25,9 @@ jobs:
     - name: latexmkによる備立
       run: |
         latexmk main.tex
+
+  release:
+    needs: build
     - name: 公開版を生成
       id: create-release
       uses: actions/create-release@v1
