@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: commit_messageを設定
         run: |
-          echo "::set-output nmae=commit_message::$(git log --format=%B -n 1 ${{ github.event.after }})"
+          echo "::set-output name=commit_message::$(git log --format=%B -n 1 ${{ github.event.after }})"
   release:
     name: 組版結果を離立
     runs-on: ubuntu-latest
