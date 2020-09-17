@@ -32,7 +32,8 @@ jobs:
     outputs:
       commit_message:
     steps:
-      - id: set-commit_message
+      - uses: actions/checkout@v1
+      - name: commit_messageを設定
         run: |
           echo "::set-output nmae=commit_message::$(git log --format=%B -n 1 ${{ github.event.after }})"
   release:
