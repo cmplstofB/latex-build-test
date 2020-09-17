@@ -28,6 +28,9 @@ jobs:
 
   release:
     needs: build
+    - name: 遂行説辞を取得
+      run: |
+        echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
     - name: 公開版を生成
       id: create-release
       uses: actions/create-release@v1
@@ -35,7 +38,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        release_name: 公開版 (${{ github.ref }})
+        body: ${{ env.commitmsg }}
         draft: false
         prerelease: false
     - name: 公開版を上げ込み
