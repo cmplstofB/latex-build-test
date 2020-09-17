@@ -27,6 +27,7 @@ jobs:
         latexmk main.tex
 
   release:
+    name: 組版結果を離立
     needs: build
     - name: 遂行説辞を取得
       run: |
