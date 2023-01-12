@@ -16,7 +16,7 @@ jobs:
     name: LaTeX組版
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    container: dockershelf/latex:full
+    container: pandoc/latex:2.19-alpine
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
